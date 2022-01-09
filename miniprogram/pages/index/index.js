@@ -1,0 +1,176 @@
+// pages/index/index.js
+var app = getApp()
+const config = require("../../config.js");
+Page({
+
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        show_auth: false
+    },
+
+    /** 
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
+        // let that = this;
+        // wx.showLoading({
+        //     title: '加载中...',
+        // });
+        // wx.getSetting({
+        //     success(res) {
+        //         console.log(res)
+        //         if (!res.authSetting['scope.userInfo']) {
+        //             that.setData({
+        //                 show_auth: true
+        //             });
+        //             wx.hideLoading()
+        //         } else {
+        //获取用户信息
+        this.getUserInfo()
+        //         }
+        //     }
+        // })
+    },
+    // login
+    login: function () {
+        var that = this
+        wx.showLoading({
+            title: '登录中...',
+        });
+        // 调用云函数
+        wx.cloud.callFunction({
+            name: 'login',
+            data: {},
+            success: res => {
+                app.globalData.userId = res.result.openid
+                wx.setStorageSync('openid', res.result.openid)
+                wx.hideLoading()
+                wx.switchTab({
+                    url: '/pages/home/index/index'
+                })
+            },
+            fail: err => {
+                console.log(err)
+            }
+        })
+    },
+    /**
+     * 获取用户信息 
+     */
+    
+    getUserInfo: function () {
+        // wx.showLoading({
+        //     title: '加载中...',
+        // });
+        // console.log('get user info');
+        let that = this;
+                wx.getUserProfile({
+                    desc:'您的信息仅作为个人展示噢',
+                    success: res => {
+                        // 可以将 res 发送给后台解码出 unionId
+                        app.globalData.userInfo = res.userInfo
+                        // 缓存
+                        if (!wx.getStorageSync('userInfo')) {
+                            wx.setStorageSync('userInfo', res.userInfo)
+
+                        }
+                        wx.hideLoading()
+                        wx.switchTab({
+                            url: '/pages/home/index/index'
+                        })
+                        // 登录
+                        that.login()
+                    },
+                    fail: (res) =>{
+                        console.log('获取用户信息失败',res)
+                        wx.showToast({
+                            title: '信息授权失败~',
+                            duration: 1000,
+                            icon: 'error',
+                            mask: true
+                        })
+                    }
+                })
+                // } else {
+                //     console.log('未授权');
+                //     wx.navigateTo({
+                //         url: '/pages/index/index',
+                //     })
+                // }
+    },
+
+    /**
+     * 监听用户点击授权按钮
+     */
+    getAuthuserInfo: function (data) {
+        // console.log('data', data)
+        // console.log('data', data.detail.errMsg)
+        // if (data.detail.errMsg == "getUserProfile:ok") {
+        //     this.setData({
+        //         show_auth: false
+        //     });
+        // wx.showLoading({
+        //     title: '登录中...',
+        // })
+        // 获取用户信息
+        this.getUserProfile()
+        // this.login()
+        // } else {
+        //     this.setData({
+        //         show_auth: true
+        //     });
+        // }
+
+    },
+
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () {
+
+    },
+
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function () {
+
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
+
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () {
+
+    }
+})

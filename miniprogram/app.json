@@ -1,0 +1,48 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/home/index/index",
+        "pages/home/post/post",
+        "pages/home/postTopic/postTopic",
+        "pages/home/post_detail/post_detail",
+        "pages/home/topic_comment/topic_comment",
+        "pages/home/topic_detail/topic_detail",
+        "pages/sale/index/sale",
+        "pages/sale/post_sale/post_sale",
+        "pages/sale/comment_sale/comment_sale",
+        "pages/personal/index/personal",
+        "pages/personal/message/message",
+        "pages/personal/post_list/post_list",
+        "pages/personal/topic_list/topic_list",
+        "pages/personal/sale_list/sale_list",
+        "pages/compare_face/face"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#66CDAA",
+        "navigationBarTitleText": "励学坊",
+        "navigationBarTextStyle": "white"
+    },
+    "permission": {},
+    "tabBar": {
+        "color": "#515151",
+        "selectedColor": "#66CDAA",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [
+            {
+                "pagePath": "pages/home/index/index",
+                "iconPath": "image/saylove.png",
+                "selectedIconPath": "image/select-saylove.png",
+                "text": "励学清单"
+            },
+            {
+                "pagePath": "pages/personal/index/personal",
+                "iconPath": "image/iam.png",
+                "selectedIconPath": "image/select-iam.png",
+                "text": "我的"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
+}

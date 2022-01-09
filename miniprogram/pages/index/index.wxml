@@ -1,0 +1,10 @@
+<view >
+  <image src="/image/welcome.png" class="img"></image>
+  <view class='auth-wall'>
+    <view class='auth-tips'>
+      <!-- <image src='/image/welcome.png'></image> -->
+      <view>Hello , 欢迎使用 励学坊！</view>
+    </view>
+    <button bindtap="getUserInfo">登陆</button>
+  </view>
+</view>
